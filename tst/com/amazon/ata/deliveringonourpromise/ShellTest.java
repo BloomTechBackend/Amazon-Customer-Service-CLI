@@ -8,8 +8,10 @@ import com.amazon.ata.deliveringonourpromise.types.PromiseHistory;
 import com.amazon.ata.input.console.ATAUserHandler;
 import com.amazon.ata.ordermanipulationauthority.OrderCondition;
 
+import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.matchers.Null;
 
 import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
@@ -19,10 +21,7 @@ import java.time.ZonedDateTime;
 import java.util.Arrays;
 import java.util.regex.Pattern;
 
-import static org.junit.jupiter.api.Assertions.assertEquals;
-import static org.junit.jupiter.api.Assertions.assertFalse;
-import static org.junit.jupiter.api.Assertions.assertNotNull;
-import static org.junit.jupiter.api.Assertions.assertTrue;
+import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.ArgumentMatchers.anyString;
 import static org.mockito.Mockito.mock;
@@ -59,6 +58,7 @@ public class ShellTest {
         // THEN - no exception thrown
         assertNotNull(result);
     }
+
 
     @Test
     public void handleUserRequest_orderDoesNotExist_doesntRaiseException() {
@@ -286,6 +286,28 @@ public class ShellTest {
     }
 
     // FIXME: Adding some required tests for testing purposes
+//    @Test
+//    public void handleUserRequest_withNullOrderID_RaisesException(){
+//        // GIVEN
+//        String orderId = "111-749023-7630574";
+//        Order order = Order.builder()
+//                .withOrderId(orderId)
+//                .withCustomerId("12345")
+//                .build();
+//        PromiseHistory promiseHistory = new PromiseHistory(order);
+//        when(mockUserHandler.getString(anyString(), anyString())).thenReturn(orderId);
+//        when(mockPromiseHistoryClient.getPromiseHistoryByOrderId(anyString())).thenReturn(promiseHistory);
+//
+//        // WHEN
+//        String result = shell.handleUserRequest();
+//
+//        //THEN
+//        Assertions.assertThrows(NullPointerException.class, () -> {
+//            shell.handleUserRequest();},"Expected NullPointerException when entering an invalid ID.");
+//    }
+
+
+
     @Test
     void ARequiredTest() {
         assertTrue(true);

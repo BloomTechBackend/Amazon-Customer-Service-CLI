@@ -67,10 +67,10 @@ public class Shell {
             {
                 System.out.println(shell.handleUserRequest());
             } while (shell.userHasAnotherRequest());
-        } catch (Exception e)
+        } catch (Exception e) //FIX ME e: "java.lang.NullPointerException" cannot invoke getCustomerOrderItemList() because "order" is "null
         {
             System.out.println("Error encountered. Exiting.");
-        }
+        } //Where does the ordeID become null? go over it again
 
         System.out.println("Thank you for using the Promise History CLI. Have a great day!\n\n");
     }
@@ -90,8 +90,8 @@ public class Shell {
         } while ("".equals(response));
 
         PromiseHistory promiseHistory = promiseHistoryClient.getPromiseHistoryByOrderId(response);
-        if (promiseHistory.getOrder() == null) {
-            return String.format(UNKNOWN_ORDER_MESSAGE, response);
+        if (promiseHistory == null || promiseHistory.getOrder() == null) {
+            return String.format(UNKNOWN_ORDER_MESSAGE, response); //FIX ME HERE
         }
         return renderOrderTable(promiseHistory.getOrder()) + renderPromiseHistoryTable(promiseHistory);
     }
