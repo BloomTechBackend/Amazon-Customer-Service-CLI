@@ -56,8 +56,7 @@ public class Shell {
      *
      * @param args command line args (ignored).
      * */
-    public static void main(String[] args)
-    {
+    public static void main(String[] args) {
         Shell shell = new Shell(App.getPromiseHistoryClient(), new ATAUserHandler());
         shell.processCommandLineArgs(args);
 
@@ -70,7 +69,6 @@ public class Shell {
         } catch (Exception e) //FIX ME e: "java.lang.NullPointerException" cannot invoke getCustomerOrderItemList() because "order" is "null
         {
             System.out.println("Error encountered. Exiting.");
-        } //Where does the ordeID become null? go over it again
 
         System.out.println("Thank you for using the Promise History CLI. Have a great day!\n\n");
     }
