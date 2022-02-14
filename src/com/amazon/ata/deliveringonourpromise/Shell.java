@@ -60,17 +60,16 @@ public class Shell {
         Shell shell = new Shell(App.getPromiseHistoryClient(), new ATAUserHandler());
         shell.processCommandLineArgs(args);
 
-        try
-        {
-            do
-            {
+        try {
+            do {
                 System.out.println(shell.handleUserRequest());
             } while (shell.userHasAnotherRequest());
         } catch (Exception e) //FIX ME e: "java.lang.NullPointerException" cannot invoke getCustomerOrderItemList() because "order" is "null
         {
             System.out.println("Error encountered. Exiting.");
 
-        System.out.println("Thank you for using the Promise History CLI. Have a great day!\n\n");
+            System.out.println("Thank you for using the Promise History CLI. Have a great day!\n\n");
+        }
     }
 
     /**

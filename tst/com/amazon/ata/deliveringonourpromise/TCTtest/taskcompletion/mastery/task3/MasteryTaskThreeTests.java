@@ -73,6 +73,7 @@ public class MasteryTaskThreeTests {
 
         // WHEN
         List<OrderItem> customerOrderItemList = order.getCustomerOrderItemList();
+        System.out.println(customerOrderItemList);
         // trying to remove elements should fail and/or not change Order's list
         // CHECKSTYLE:OFF:EmptyBlock
         try {
@@ -87,14 +88,17 @@ public class MasteryTaskThreeTests {
         } catch (UnsupportedOperationException e) {
             // exception acceptable if list unmodified
         }
+
         // CHECKSTYLE:ON:EmptyBlock
 
-        // THEN
+        // THEN.
+
         assertEquals(
             order.getCustomerOrderItemList().size(),
             1,
             "Expected only original OrderItem to exist in Order, but found: " + order.getCustomerOrderItemList()
         );
+
         String orderItemId = order.getCustomerOrderItemList().get(0).getCustomerOrderItemId();
         assertNotEquals(orderItemId, maliciousCustomerOrderItemId,
             "Expected Order class to not allow item to be maliciously inserted but it was!");
@@ -122,13 +126,16 @@ public class MasteryTaskThreeTests {
 
         // WHEN - attempt to update the list that was already passed into the Order should
         // not modify the Order's list, even if modified before build()
+
         orderItemList.add(maliciousCustomerOrderItem);
 
         // THEN
         Order order = orderBuilder.build();
+
         List<OrderItem> customerOrderItemList = order.getCustomerOrderItemList();
         assertEquals(
             customerOrderItemList.size(),
+
             1,
             "Expected only original OrderItem to exist in Order, but found: " + customerOrderItemList
         );
