@@ -60,17 +60,15 @@ public class Shell {
         Shell shell = new Shell(App.getPromiseHistoryClient(), new ATAUserHandler());
         shell.processCommandLineArgs(args);
 
-        try
-        {
-            do
-            {
+        try {
+            do {
                 System.out.println(shell.handleUserRequest());
             } while (shell.userHasAnotherRequest());
-        } catch (Exception e) //FIX ME e: "java.lang.NullPointerException" cannot invoke getCustomerOrderItemList() because "order" is "null
-        {
+        } catch (Exception e) {
             System.out.println("Error encountered. Exiting.");
 
-        System.out.println("Thank you for using the Promise History CLI. Have a great day!\n\n");
+            System.out.println("Thank you for using the Promise History CLI. Have a great day!\n\n");
+        }
     }
 
     /**
@@ -80,19 +78,17 @@ public class Shell {
      * @return the user-facing output from the last request.
      */
     @VisibleForTesting
-    String handleUserRequest() {
+        String handleUserRequest() {
         String response;
-
-        do {
-            response = inputHandler.getString(ORDER_ID_PROMPT, INLINE_PROMPT).trim();
-        } while ("".equals(response));
-
-        PromiseHistory promiseHistory = promiseHistoryClient.getPromiseHistoryByOrderId(response);
-        if (promiseHistory == null || promiseHistory.getOrder() == null) {
-            return String.format(UNKNOWN_ORDER_MESSAGE, response); //FIX ME HERE
+            do {
+                response = inputHandler.getString(ORDER_ID_PROMPT, INLINE_PROMPT).trim();
+            } while ("".equals(response));
+            PromiseHistory promiseHistory = promiseHistoryClient.getPromiseHistoryByOrderId(response);
+            if (promiseHistory == null || promiseHistory.getOrder() == null) {
+                return String.format(UNKNOWN_ORDER_MESSAGE, response);
+            }
+            return renderOrderTable(promiseHistory.getOrder()) + renderPromiseHistoryTable(promiseHistory);
         }
-        return renderOrderTable(promiseHistory.getOrder()) + renderPromiseHistoryTable(promiseHistory);
-    }
 
     /**
      * Generates the user-facing representation of the given promise history.
