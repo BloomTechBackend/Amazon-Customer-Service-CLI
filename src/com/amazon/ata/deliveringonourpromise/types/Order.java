@@ -75,7 +75,6 @@ public class Order {
      */
     public List<OrderItem> getCustomerOrderItemList() {
         return new ArrayList<OrderItem>(immutableCustomerOrderItemList);
-//        return customerOrderItemList;
     }
 
     public String getShipOption() {
@@ -147,9 +146,6 @@ public class Order {
             }
             this.customerOrderItemList = protectedList;
             return this;
-
-//            this.customerOrderItemList = customerOrderItemList;
-//            return this;
         }
 
         public Builder withShipOption(String shipOption) {
@@ -176,7 +172,6 @@ public class Order {
             order.customerId = customerId;
             order.marketplaceId = marketplaceId;
             order.condition = condition;
-//            order.customerOrderItemList = customerOrderItemList;
             order.immutableCustomerOrderItemList = customerOrderItemList;
             order.shipOption = shipOption;
             order.orderDate = orderDate;
