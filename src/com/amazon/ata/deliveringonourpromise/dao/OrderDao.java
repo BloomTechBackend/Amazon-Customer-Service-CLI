@@ -38,7 +38,6 @@ public class OrderDao implements ReadOnlyDao<String, Order> {
         OrderResult omaOrder = omaClient.getCustomerOrderByOrderId(orderId);
 
         if (null == omaOrder) {
-//            System.out.println("The order object corresponding to the ID does not exist.");
             return null;
         }
 

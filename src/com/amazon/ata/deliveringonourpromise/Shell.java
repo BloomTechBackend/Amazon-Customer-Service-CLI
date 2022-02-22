@@ -78,17 +78,19 @@ public class Shell {
      * @return the user-facing output from the last request.
      */
     @VisibleForTesting
-        String handleUserRequest() {
+    String handleUserRequest() {
         String response;
-            do {
-                response = inputHandler.getString(ORDER_ID_PROMPT, INLINE_PROMPT).trim();
-            } while ("".equals(response));
-            PromiseHistory promiseHistory = promiseHistoryClient.getPromiseHistoryByOrderId(response);
-            if (promiseHistory == null || promiseHistory.getOrder() == null) {
-                return String.format(UNKNOWN_ORDER_MESSAGE, response);
-            }
-            return renderOrderTable(promiseHistory.getOrder()) + renderPromiseHistoryTable(promiseHistory);
+
+        do {
+            response = inputHandler.getString(ORDER_ID_PROMPT, INLINE_PROMPT).trim();
+        } while ("".equals(response));
+
+        PromiseHistory promiseHistory = promiseHistoryClient.getPromiseHistoryByOrderId(response);
+        if (promiseHistory == null || promiseHistory.getOrder() == null) {
+            return String.format(UNKNOWN_ORDER_MESSAGE, response);
         }
+        return renderOrderTable(promiseHistory.getOrder()) + renderPromiseHistoryTable(promiseHistory);
+    }
 
     /**
      * Generates the user-facing representation of the given promise history.
