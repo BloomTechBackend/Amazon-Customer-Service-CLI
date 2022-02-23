@@ -10,11 +10,11 @@ What's the problem with the way the PromiseDao currently works?
 
 What ways will the CS representatives use the new multiple-client PromiseDao?
 
--
+- To retrieve promises from differnt sources besides the Delivery Promise Service.
 
 In a few sentences, how does the PromiseDao work right now?
 
--
+- It sends the OrderItemID to DPS, which then returns a Promise, which it then adds to a List<Promise> that it sends back to PromiseHistory
 
 Consider a developer unfamiliar with the Missed Promise CLI. Can you add diagrams here that will help them understand how the PromiseDao works right now?
 

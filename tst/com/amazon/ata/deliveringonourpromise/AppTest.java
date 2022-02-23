@@ -11,4 +11,9 @@ public class AppTest {
         // WHEN + THEN
         assertNotNull(App.getPromiseHistoryClient());
     }
+    @Test
+    public void getOrderFulfillmentServiceClient_always_createsOrderFulfillmentService(){
+        //WHEN+THEN
+        assertNotNull(App.getOrderFulfillmentServiceClient());
+    }
 }
