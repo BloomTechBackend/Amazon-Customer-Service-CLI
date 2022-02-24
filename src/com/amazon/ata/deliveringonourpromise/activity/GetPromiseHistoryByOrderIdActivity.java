@@ -1,5 +1,6 @@
 package com.amazon.ata.deliveringonourpromise.activity;
 
+import com.amazon.ata.deliveringonourpromise.comparators.PromiseAsinComparator;
 import com.amazon.ata.deliveringonourpromise.dao.ReadOnlyDao;
 import com.amazon.ata.deliveringonourpromise.types.Order;
 import com.amazon.ata.deliveringonourpromise.types.OrderItem;
@@ -7,6 +8,7 @@ import com.amazon.ata.deliveringonourpromise.types.Promise;
 import com.amazon.ata.deliveringonourpromise.types.PromiseHistory;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 /**
@@ -58,7 +60,6 @@ public class GetPromiseHistoryByOrderIdActivity {
         PromiseHistory history = new PromiseHistory(order);
 
         //Below: List<Promise> is adding orderItems and returning Promise History. It is using the above list created for MT5
-        //Time:9:29am lets see if it works. Next step: promise history needs to print it out to the user.
         if (customerOrderItemListForPromises.get(0) != null) {
             for (int i = 0; i < order.getCustomerOrderItemList().size(); i++) {
                 OrderItem orderItem = order.getCustomerOrderItemList().get(i);
@@ -68,15 +69,28 @@ public class GetPromiseHistoryByOrderIdActivity {
                     history.addPromise(promise);
                 }
             }
-
-//
-//            List<Promise> promises = promiseDao.get(customerOrderItem.getCustomerOrderItemId());// returns promise for ONE ITEM. Make return for ALL ITEMS in one ID
-//            for (Promise promise : promises) {
-//                promise.setConfidence(customerOrderItem.isConfidenceTracked(), customerOrderItem.getConfidence());
-//                history.addPromise(promise);
-//            }
-
         }
-        return history;
+//        Collections.sort(history.getPromises(), new PromiseAsinComparator()); // didn't work probably because sort has not permission to access hsitory.
+        List<Promise> sortedPromises = history.getPromises();
+        Collections.sort(sortedPromises, new PromiseAsinComparator());
+        PromiseHistory sortedHistory = new PromiseHistory(order);
+        for (int i = 0; i < sortedPromises.size(); i++){
+            sortedHistory.addPromise(sortedPromises.get(i));
+        }
+
+
+        //BELOW CODE WORKS BEFORE SORTING BY ASIN:
+//        if (customerOrderItemListForPromises.get(0) != null) {
+//            for (int i = 0; i < order.getCustomerOrderItemList().size(); i++) {
+//                OrderItem orderItem = order.getCustomerOrderItemList().get(i);
+//                List<Promise> promises = promiseDao.get(orderItem.getCustomerOrderItemId());
+//                for (Promise promise : promises) {
+//                    promise.setConfidence(orderItem.isConfidenceTracked(), orderItem.getConfidence());
+//                    history.addPromise(promise);
+//                }
+//            }
+//        }
+
+        return sortedHistory;
     }
 }
