@@ -59,6 +59,7 @@ public class OrderManipulationAuthority {
     }
 
     private OrderResult convertOrderDataToOrderResult(OrderData orderData) {
+        //TODO check if the below list can identify > 1 quantity
         List<OrderResultItem> orderResultItems = new ArrayList<>();
         for (OrderItemData orderItemData : orderData.getCustomerOrderItemList()) {
             if (null == orderItemData) {
@@ -66,6 +67,9 @@ public class OrderManipulationAuthority {
             }
             orderResultItems.add(convertOrderItemDataToOrderResultItem(orderItemData));
         }
+
+        //TODO MT5: ^^This is already adding all orders to a list. No work to do here. Check where the order info is getting displayed in a list.
+        // TOOD make sure the promise isplay is displaying all and not just the first item.
 
         List<OrderShipment> orderShipments = new ArrayList<>();
         for (OrderShipmentData orderShipmentData : orderData.getCustomerShipments()) {

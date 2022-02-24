@@ -28,6 +28,7 @@ public class DeliveryPromiseServiceClient implements PromiseClient {
      */
     public Promise getDeliveryPromiseByOrderItemId(String customerOrderItemId) {
         DeliveryPromise deliveryPromise = dpService.getDeliveryPromise(customerOrderItemId);
+        //TODO if different promises can be accesses through deliveryPromise
 
         if (null == deliveryPromise) {
             return null;
