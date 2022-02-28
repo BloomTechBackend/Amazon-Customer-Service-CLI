@@ -1,7 +1,6 @@
 package com.amazon.ata.deliveringonourpromise.dao;
 
 import com.amazon.ata.deliveringonourpromise.PromiseClient;
-import com.amazon.ata.deliveringonourpromise.deliverypromiseservice.DeliveryPromiseServiceClient;
 import com.amazon.ata.deliveringonourpromise.ordermanipulationauthority.OrderManipulationAuthorityClient;
 import com.amazon.ata.deliveringonourpromise.types.Promise;
 import com.amazon.ata.ordermanipulationauthority.OrderResult;
@@ -16,7 +15,6 @@ import java.util.List;
  * DAO implementation for Promises.
  */
 public class PromiseDao implements ReadOnlyDao<String, List<Promise>> {
-//    private DeliveryPromiseServiceClient dpsClient;
     private OrderManipulationAuthorityClient omaClient;
     private List<PromiseClient> clients;
 
@@ -29,10 +27,6 @@ public class PromiseDao implements ReadOnlyDao<String, List<Promise>> {
         this.omaClient = omaClient;
         this.clients = clients;
     }
-//    }    public PromiseDao(DeliveryPromiseServiceClient dpsClient, OrderManipulationAuthorityClient omaClient) {
-//        this.dpsClient = dpsClient;
-//        this.omaClient = omaClient;
-//    }
 
     /**
      * Returns a list of all Promises associated with the given order item ID.
@@ -43,27 +37,16 @@ public class PromiseDao implements ReadOnlyDao<String, List<Promise>> {
     public List<Promise> get(String customerOrderItemId) {
         // Fetch the delivery date, so we can add to any promises that we find
         ZonedDateTime itemDeliveryDate = getDeliveryDateForOrderItem(customerOrderItemId);
-//
         List<Promise> promises = new ArrayList<>();
-        for (PromiseClient promiseClient : clients){
+        for (PromiseClient promiseClient : clients) {
             Promise promise = promiseClient.getDeliveryPromiseByOrderItemId(customerOrderItemId);
 
-            if (promise != null){
+            if (promise != null) {
                 promise.setDeliveryDate(itemDeliveryDate);
                 promises.add(promise);
             }
         }
         return promises;
-//
-//        // fetch Promise from Delivery Promise Service. If exists, add to list of Promises to return.
-//        // Set delivery date
-//        Promise dpsPromise = dpsClient.getDeliveryPromiseByOrderItemId(customerOrderItemId);
-//        if (dpsPromise != null) {
-//            dpsPromise.setDeliveryDate(itemDeliveryDate);
-//            promises.add(dpsPromise);
-//        }
-//
-//        return promises;
     }
 
     /*

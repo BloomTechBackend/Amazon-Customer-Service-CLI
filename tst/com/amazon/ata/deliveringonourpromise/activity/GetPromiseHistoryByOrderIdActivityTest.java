@@ -39,7 +39,7 @@ public class GetPromiseHistoryByOrderIdActivityTest {
 
         // WHEN + THEN
         // (participants: we'll learn what this is doing later in the course)
-        assertThrows(IllegalArgumentException.class, () -> activity.getPromiseHistoryByOrderId(orderId));
+        assertThrows(IllegalArgumentException.class, () -> activity.getPromiseHisByOrderId(orderId));
     }
 
     @Test
@@ -48,7 +48,7 @@ public class GetPromiseHistoryByOrderIdActivityTest {
         String orderId = "900-3746401-0000001";
 
         // WHEN
-        PromiseHistory history = activity.getPromiseHistoryByOrderId(orderId);
+        PromiseHistory history = activity.getPromiseHisByOrderId(orderId);
 
         // THEN
         boolean foundDpsPromise = false;

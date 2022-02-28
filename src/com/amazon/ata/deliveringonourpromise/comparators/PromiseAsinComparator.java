@@ -1,8 +1,6 @@
 package com.amazon.ata.deliveringonourpromise.comparators;
 
-import com.amazon.ata.deliveringonourpromise.dao.OrderDao;
 import com.amazon.ata.deliveringonourpromise.types.Promise;
-import com.amazon.ata.deliveringonourpromise.types.PromiseHistory;
 
 import java.util.Comparator;
 

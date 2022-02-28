@@ -21,8 +21,8 @@ import java.util.List;
  */
 public class App {
     /* don't instantiate me */
-    private App() {}
     private static List<PromiseClient> clients = new ArrayList<>();
+    private App() {}
 
     /**
      * Fetch a new PromiseHistoryClient with all of its dependencies loaded for use in the Shell!
@@ -43,6 +43,12 @@ public class App {
     public static OrderDao getOrderDao() {
         return new OrderDao(getOrderManipulationAuthorityClient());
     }
+
+    /**
+     * returns promise Dao.
+     * @return a PromiseDao
+     */
+
     public static PromiseDao getPromiseDao() {
         clients.add(getDeliveryPromiseServiceClient());
         clients.add(getOrderFulfillmentServiceClient());
@@ -57,7 +63,7 @@ public class App {
         return new DeliveryPromiseServiceClient(getDeliveryPromiseService());
     }
 
-    public static OrderFulfillmentServiceClient getOrderFulfillmentServiceClient(){
+    public static OrderFulfillmentServiceClient getOrderFulfillmentServiceClient() {
         return new OrderFulfillmentServiceClient(getOrderFulfillmentService());
     }
 
@@ -69,7 +75,7 @@ public class App {
         return new DeliveryPromiseService(getOrderDatastore());
     }
 
-    public static OrderFulfillmentService getOrderFulfillmentService(){
+    public static OrderFulfillmentService getOrderFulfillmentService() {
         return new OrderFulfillmentService(getOrderDatastore(), getDeliveryPromiseService());
     }
 

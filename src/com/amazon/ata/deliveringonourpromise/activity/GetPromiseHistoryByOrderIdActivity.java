@@ -7,7 +7,6 @@ import com.amazon.ata.deliveringonourpromise.types.OrderItem;
 import com.amazon.ata.deliveringonourpromise.types.Promise;
 import com.amazon.ata.deliveringonourpromise.types.PromiseHistory;
 
-import java.util.ArrayList;
 import java.util.Collections;
 import java.util.List;
 
@@ -39,27 +38,29 @@ public class GetPromiseHistoryByOrderIdActivity {
      * @return PromiseHistory containing the order and promise history for that order
      */
 
-    //TODO MT5 the below is displaying one history only. Needs to display multiple histories if > 1 item exists per order.
-    public PromiseHistory getPromiseHistoryByOrderId(String orderId) {
+    //TODO MT5 the below is displaying one history only.
+    // Needs to display multiple histories if > 1 item exists per order.
+    public PromiseHistory getPromiseHisByOrderId(String orderId) {
         if (null == orderId) {
             throw new IllegalArgumentException("order ID cannot be null");
         }
 
         Order order = orderDao.get(orderId);
         OrderItem customerOrderItem = null;
-        List<OrderItem> customerOrderItemListForPromises = order.getCustomerOrderItemList(); //TODO MT5
+        List<OrderItem> customerOrderItemListForPromises = order.getCustomerOrderItemList();
 
         if (null != order) {
             List<OrderItem> customerOrderItems = order.getCustomerOrderItemList();
             if (customerOrderItems != null && !customerOrderItems.isEmpty()) {
-                customerOrderItem = customerOrderItems.get(0); //Pre MT5
+                customerOrderItem = customerOrderItems.get(0);
             }
         }
 
 
         PromiseHistory history = new PromiseHistory(order);
 
-        //Below: List<Promise> is adding orderItems and returning Promise History. It is using the above list created for MT5
+        //Below: List<Promise> is adding orderItems and returning Promise History.
+        // It is using the above list created for MT5
         if (customerOrderItemListForPromises.get(0) != null) {
             for (int i = 0; i < order.getCustomerOrderItemList().size(); i++) {
                 OrderItem orderItem = order.getCustomerOrderItemList().get(i);
@@ -70,26 +71,13 @@ public class GetPromiseHistoryByOrderIdActivity {
                 }
             }
         }
-//        Collections.sort(history.getPromises(), new PromiseAsinComparator()); // didn't work probably because sort has not permission to access hsitory.
         List<Promise> sortedPromises = history.getPromises();
         Collections.sort(sortedPromises, new PromiseAsinComparator());
         PromiseHistory sortedHistory = new PromiseHistory(order);
-        for (int i = 0; i < sortedPromises.size(); i++){
+        for (int i = 0; i < sortedPromises.size(); i++) {
             sortedHistory.addPromise(sortedPromises.get(i));
         }
 
-
-        //BELOW CODE WORKS BEFORE SORTING BY ASIN:
-//        if (customerOrderItemListForPromises.get(0) != null) {
-//            for (int i = 0; i < order.getCustomerOrderItemList().size(); i++) {
-//                OrderItem orderItem = order.getCustomerOrderItemList().get(i);
-//                List<Promise> promises = promiseDao.get(orderItem.getCustomerOrderItemId());
-//                for (Promise promise : promises) {
-//                    promise.setConfidence(orderItem.isConfidenceTracked(), orderItem.getConfidence());
-//                    history.addPromise(promise);
-//                }
-//            }
-//        }
 
         return sortedHistory;
     }
