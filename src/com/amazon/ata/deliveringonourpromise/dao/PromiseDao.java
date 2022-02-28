@@ -39,6 +39,7 @@ public class PromiseDao implements ReadOnlyDao<String, List<Promise>> {
         ZonedDateTime itemDeliveryDate = getDeliveryDateForOrderItem(customerOrderItemId);
         List<Promise> promises = new ArrayList<>();
         for (PromiseClient promiseClient : clients) {
+//            Promise promise = promiseClient.getDeliveryPromiseByOrderItemId(customerOrderItemId);
             Promise promise = promiseClient.getDeliveryPromiseByOrderItemId(customerOrderItemId);
 
             if (promise != null) {
