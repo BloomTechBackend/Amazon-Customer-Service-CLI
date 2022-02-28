@@ -23,9 +23,8 @@ PromiseHistory -- Order
 PromiseHistory -- Promise
 Order -- OrderItem
 
-OrderDao implements ReadOnlyDao
-OrderDao -- ReadOnlyDao
-OrderDao |> ReadOnlyDao
+OrderDao ..|> ReadOnlyDao
+PromiseDao ..|> ReadOnlyDao
 
 
 @enduml
