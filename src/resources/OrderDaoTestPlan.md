@@ -39,3 +39,16 @@ Happy case, verifying that the OrderDao can return an order.
 
 ### Then
 * The result is not null
+
+### get_invalidOrderID_throwsException
+
+
+#### Given
+* An order ID that we know does not exist
+
+#### When
+1. We call `get()` with that order ID
+
+### Then
+* The result is exception
+
