@@ -24,6 +24,10 @@ public class OrderTest {
                 .withCustomerOrderItemList(new ArrayList<OrderItem>())
                 .build();
 
+        List<OrderItem> originalList = someOrder.getCustomerOrderItemList();
+        someOrder.getCustomerOrderItemList().add(someItem);
+        List<OrderItem> modifiedList = someOrder.getCustomerOrderItemList();
+
         //WHEN
 //        int sizeOfOriginalList = someOrder.getCustomerOrderItemList().size();
 //        System.out.println("sizeOfOriginalList = " + sizeOfOriginalList);
@@ -35,7 +39,8 @@ public class OrderTest {
 //        System.out.println(isEqual);
 
          //THEN
-        Assertions.assertThrows(UnsupportedOperationException.class, () -> someOrder.getCustomerOrderItemList().add(someItem), "You cannot change the order's variables.");
+        Assertions.assertFalse(originalList == modifiedList,  "A modified list must be a different object from the original.");
+//        Assertions.assertThrows(UnsupportedOperationException.class, () -> someOrder.getCustomerOrderItemList().add(someItem), "You cannot change the order's variables.");
 
     }
 
