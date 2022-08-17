@@ -38,11 +38,16 @@ public class OrderTest {
 //        boolean isEqual =sizeofModifiedList == sizeOfOriginalList;
 //        System.out.println(isEqual);
 
+<<<<<<< HEAD
          //THEN
+=======
+        //THEN
+>>>>>>> sprint_3
         Assertions.assertFalse(originalList == modifiedList,  "A modified list must be a different object from the original.");
 //        Assertions.assertThrows(UnsupportedOperationException.class, () -> someOrder.getCustomerOrderItemList().add(someItem), "You cannot change the order's variables.");
 
     }
+
 
 
 

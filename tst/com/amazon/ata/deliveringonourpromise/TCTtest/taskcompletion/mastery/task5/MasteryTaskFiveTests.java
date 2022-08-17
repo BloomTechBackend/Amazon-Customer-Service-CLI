@@ -167,7 +167,7 @@ public class MasteryTaskFiveTests {
         initializeMocks(order, orderItemIdToPromises);
 
         // WHEN
-        PromiseHistory promiseHistory = activity.getPromiseHistoryByOrderId(orderId);
+        PromiseHistory promiseHistory = activity.getPromiseHisByOrderId(orderId);
 
         // THEN
         // all promises are present
@@ -196,7 +196,7 @@ public class MasteryTaskFiveTests {
         initializeMocks(order, orderItemIdToPromises);
 
         // WHEN
-        PromiseHistory promiseHistory = activity.getPromiseHistoryByOrderId(orderId);
+        PromiseHistory promiseHistory = activity.getPromiseHisByOrderId(orderId);
 
         // THEN
         assertOrdersAndPromisesMatch(order, promises, promiseHistory);
