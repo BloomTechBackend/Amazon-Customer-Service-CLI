@@ -48,4 +48,9 @@ public class OrderDaoTest {
                 () -> orderDao.get(nullID).getOrderId(), "Null ID should return a NullPointerException.");
 
     }
+<<<<<<< HEAD
+=======
+
+
+>>>>>>> sprint_2
 }
