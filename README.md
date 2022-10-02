@@ -1,6 +1,27 @@
 # Amazon Customer Service CLI 
 
 
+## Explaining Commit Comments
+MT1:
+- A CS representative has filed a bug report, stating that when they request the promise history for order ID 111-749023-7630574, the Missed Promise CLI prints a weird message and exits. Reproduce the bug and comment //FIXME where the fix should go.
+
+MT2:
+- Plant & implement unit tests for OrderDao.
+
+MT3:
+- Write a unit test that fails if the Order class has any externally modifiable variables.
+- Encapsulate the Order class.
+
+MT4:
+- Redesign the PromiseDao to support multiple clients, including the OFS client we know about and future clients we can't anticipate right now.
+- Implement the OrderFulfillmentServiceClient class to get the packaging promise from the OrderFulfillmentService.
+- Update the PromiseDao to match the new design and retrieve the packaging promise from your OrderFulfillmentServiceClient. It should also use the App class to get its clients, rather than instantiating them itself. 
+
+MT5:
+- Modify the code so that it prints the promise(s) for each item in an order. Currently, the Missing Promise CLI displays promises for the first item in an order. That's not the whole story, though: Amazon often breaks orders into multiple shipments with different delivery speeds, or separates Amazon items from the items fulfilled by different vendors. Therefore, each item has a delivery promise.
+- Sort the promises associated with the order to make it easier for CS reps to use the tool.
+
+
 ## Architecture Diagram
 The Missed Promise CLI accepts an order ID from the CS representative and returns the order's information and promise history. Right now, the Missed Promise CLI will call the OrderingManipulationAuthority to get order information and the DeliveryPromiseService to get the Order Promise at the time of checkout.
 
